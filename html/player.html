@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Stream Sonic</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+
+<video id="video" controls muted autoplay playsinline width="640"></video>
+
+<script>
+    const video = document.getElementById('video');
+    const src = 'http://localhost:8080/hls/stream1.m3u8';
+
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = src;
+    }
+
+    // Allow audio after user interaction
+    document.body.addEventListener('click', () => {
+        video.muted = false;
+        video.play();
+    }, { once: true });
+
+    overlay.onclick = () => {
+        video.muted = false;
+        video.play();
+        overlay.remove();
+    };
+
+</script>
+
+</body>
+</html>
