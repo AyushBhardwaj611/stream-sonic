@@ -1,3 +1,13 @@
+  nginx-rtmp:
+    image: garfieldwtf/nginx-rtmp:arm64
+    container_name: nginx-rtmp
+    ports:
+      - "1935:1935"
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./hls:/var/www/hls
+
 services:
   nginx-rtmp:
     image: garfieldwtf/nginx-rtmp:arm64
@@ -8,4 +18,3 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./hls:/var/www/hls
-      - ./html:/var/www/html
