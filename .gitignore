@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# HLS output
+hls/*.ts
+hls/*.m3u8
+
+# Backend
+backend/**/target
+backend/**/.idea
+backend/**/.classpath
+backend/**/.project
+
+# Node
+node_modules
+
+# Docker
+.env
