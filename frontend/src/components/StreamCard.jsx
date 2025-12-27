@@ -1,12 +1,19 @@
-import React from "react";
-
-const StreamCard = ({ name, description }) => {
+export default function StreamCard({ stream }) {
   return (
-    <div className="stream-card" style={{ border: "1px solid #ccc", padding: "1rem", margin: "0.5rem", borderRadius: "8px" }}>
-      <h3>{name}</h3>
-      <p>{description}</p>
-    </div>
-  );
-};
+    <div
+      style={{
+        border: '1px solid #ddd',
+        padding: '16px',
+        borderRadius: '8px',
+        marginBottom: '12px'
+      }}
+    >
+      <h3>{stream.name}</h3>
+      <p>{stream.description}</p>
 
-export default StreamCard;
+      <span style={{ color: 'red', fontWeight: 'bold' }}>
+        ● LIVE
+      </span>
+    </div>
+  )
+}

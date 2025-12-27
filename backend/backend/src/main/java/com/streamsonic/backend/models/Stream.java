@@ -14,6 +14,8 @@ public class Stream {
 
     private String name;
     private String description;
+    private String url;
+
 
     public Stream(String name, String description) {
         this.name = name;
@@ -30,4 +32,8 @@ public class Stream {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public String getUrl() { return url; }
+    public void setUrl(String url) { this.url = url; }
+
 }
