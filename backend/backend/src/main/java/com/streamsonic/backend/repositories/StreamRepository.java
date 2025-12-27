@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StreamRepository extends JpaRepository<Stream, Long> {
-    // JpaRepository already gives you save, findById, findAll, deleteById
 }
