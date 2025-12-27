@@ -1,60 +1,42 @@
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
-import { fetchStreams } from "../services/api"; // updated import
-import "./Home.css";
+import { fetchStreams } from "../services/api";
 
 export default function Home() {
   const [streams, setStreams] = useState([]);
-  const [selectedStream, setSelectedStream] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getStreams() {
+    async function loadStreams() {
       const data = await fetchStreams();
+      console.log("Fetched streams:", data);
       setStreams(data);
+      setLoading(false);
     }
-    getStreams();
+
+    loadStreams();
   }, []);
 
-  return (
-    <div className="home-container">
-      <h1>Live Streams</h1>
-      <div className="streams-grid">
-        {streams.map((stream) => (
-          <div
-            key={stream.id}
-            className="stream-card"
-            onClick={() => setSelectedStream(stream)}
-          >
-            <ReactPlayer
-              url={stream.url}   // your backend should provide a URL field for streams
-              playing
-              controls
-              width="100%"
-              height="150px"
-            />
-            <h2>{stream.name}</h2>
-            <p>{stream.description}</p>
-          </div>
-        ))}
-      </div>
+  if (loading) {
+    return <h2>Loading streams...</h2>;
+  }
 
-      {selectedStream && (
-        <div className="modal-overlay" onClick={() => setSelectedStream(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <ReactPlayer
-              url={selectedStream.url}
-              playing
-              controls
-              width="100%"
-              height="100%"
-            />
-            <h2>{selectedStream.name}</h2>
-            <p>{selectedStream.description}</p>
-            <button className="close-btn" onClick={() => setSelectedStream(null)}>
-              Close
-            </button>
+  return (
+    <div>
+      <h1>Live Streams</h1>
+
+      {streams.length === 0 ? (
+        <p>No live streams available</p>
+      ) : (
+        streams.map((stream) => (
+          <div key={stream.id} style={{ marginBottom: "20px" }}>
+            <h3>{stream.name}</h3>
+            <p>{stream.description}</p>
+
+            <video width="600" controls>
+              <source src={stream.url} type="video/mp4" />
+            </video>
           </div>
-        </div>
+        ))
       )}
     </div>
   );
