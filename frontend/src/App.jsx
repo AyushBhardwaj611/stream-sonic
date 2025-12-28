@@ -1,11 +1,5 @@
-import Home from "./pages/Home";
+import HlsPlayer from "./HlsPlayer";
 
-function App() {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+export default function App() {
+  return <HlsPlayer />;
 }
-
-export default App;
